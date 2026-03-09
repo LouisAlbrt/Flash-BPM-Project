@@ -1,0 +1,112 @@
+%%%%%%%%% CHANGE HERE
+% \newcommand{\LVNummer}{141.079}
+% \newcommand{\LVName}{Angewandte Strahlenphysik (or other)}
+\newcommand{\TitleEN}{Title of Thesis in English} 
+\newcommand{\TitleDE}{Title of Thesis in German} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% PLEASE CHOOSE YOUR CURRICULUM
+%\newcommand{\Studium}{Biomedical Engineering}
+%\newcommand{\Studium}{Physikalische Energie- und Messtechnik}
+\newcommand{\Studium}{Technische Physik}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% PLEASE CHOOSE YOUR TYPE OF WORK
+%\newcommand{\WorkType}{Bachelorarbeit}
+%\newcommand{\WorkType}{Diplomarbeit}
+\newcommand{\WorkType}{Diplomarbeit -- Expos\'e}
+%\newcommand{\WorkType}{Projektarbeit}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% PLEASE NAME YOUR SUPERVISORS WITH AFFILIATIONS
+\newcommand{\Name}{Vorname Nachname} 
+\newcommand{\MatNr}{0123456}
+\newcommand{\BetreuerA}{Assoc. Prof. DI Dr.techn. Albert Hirtl}
+\newcommand{\BetreuerB}{Titles Frist Name Second Name}
+\newcommand{\UniA}{TU Wien / Atominstitut}
+\newcommand{\UniB}{Affiliation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\begin{titlepage}
+  \sffamily
+  \vspace*{-2cm}
+  % Replace logos as required
+  \begin{minipage}{0.5\linewidth}
+    %\inclgraphahiheightlogo{1.8cm}{TUblue}{TULogo_neu.pdf}\hfill
+    \includegraphics[height=1.8cm]{TULogo_neu.pdf}\hfill
+  \end{minipage}
+  % if you must use three logos...
+  % \begin{minipage}{0.33\linewidth}^
+  %   \includegraphics[height=1.5cm]{Cover/ATI-Logo_Small_9x5cm.png}
+  % \end{minipage}
+  \begin{minipage}{0.5\linewidth}
+    \hfill
+    %\inclgraphahiheightlogo{1.8cm}{TUblue}{MBI-Logo-Star-Typo-Blue-de_cut.pdf}
+    \includegraphics[height=1.8cm]{MBI-Logo-Star-Typo-Blue-de_cut.pdf}
+  \end{minipage}%
+  % ########################################
+  % if you prefer logos with a frame ...
+  % ########################################
+  % % Replace logos as required
+  % \begin{minipage}{0.5\linewidth}
+  %   \inclgraphahiheightlogo{1.8cm}{TUblue}{TULogo_neu.pdf}\hfill
+  % \end{minipage}
+  % % if you must use three logos...
+  % % \begin{minipage}{0.33\linewidth}
+  % %   \includegraphics[height=1.5cm]{Cover/ATI-Logo_Small_9x5cm.png}
+  % % \end{minipage}
+  % \begin{minipage}{0.5\linewidth}
+  %   \hfill
+  %   \inclgraphahiheightlogo{1.8cm}{TUblue}{MBI-Logo-Star-Typo-Blue-de_cut.pdf}
+  % \end{minipage}
+  \par
+  \vspace{1.5cm}
+  \centering \LARGE 
+  \MakeUppercase{\textbf{\WorkType}} \par
+  % \Large\LVNummer{} -- \LVName \par
+  \vspace{1.cm}	
+  \Huge
+  \textbf{\TitleEN} \par\vspace{0.5cm}
+  \textbf{\TitleDE} \par
+  \vspace{1cm}
+  {\large im Rahmen des Studiums} \par
+  \vspace{0.1cm}
+  \Large \textbf{\Studium} \par
+  \vspace{1cm}
+  \text{\large vorgelegt von} \par
+  \vspace{0.1cm}
+  \Large \textbf{\Name} \par
+  \vspace{0.1cm}
+  \text{\large Matrikelnummer:} \large\MatNr \par
+  \vspace{1cm}
+  \flushleft \small
+  \text{Durchgeführt am}\par
+  Atominstitut der Fakultät für Physik der Technischen Universität
+  Wien \par
+  in Zusammenarbeit mit \par
+  \dots \par
+  \vspace{1cm} Betreuung: \par
+  \BetreuerA\ (\UniA) \par
+  \BetreuerB\ (\UniB)\par
+
+  \vspace*{1.5cm}
+
+  % german date, otherwise comment out
+  \selectlanguage{ngerman}
+  Wien, \today \hspace{2cm} \par
+  % englisch again
+  \selectlanguage{english}
+
+  % \vspace*{1.5cm}
+  
+  % \hspace{5.7cm} \hrulefill \hspace{2cm} \hrulefill \par
+
+  % \hspace{5.7cm} (Unterschrift Verfasserin) \hspace{2.2cm}
+  % (Unterschrift Betreuer) \par
+\end{titlepage}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../main"
+%%% End:

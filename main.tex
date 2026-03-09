@@ -1,0 +1,124 @@
+\documentclass[a4paper,headsepline,oneside,11pt]{scrartcl}
+% for longer works like diploma theses maybe use
+% \documentclass[a4paper,headsepline,11pt]{scrreprt}
+% \documentclass[a4paper,headsepline,11pt]{scrbook}
+
+\input{header} % put all your packages and own commands here; helps
+               % keeping then document more clean
+\input{glossary} % define all your acronyms here
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% begin document
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% T I T L E P A G E
+\include{titlepage/titlepage}
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+\label{sec:Abstract}
+Provide an abstract; only text, no formulae; it will be copied into TISS.
+
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section*{Zusammenfassung}
+%\addcontentsline{toc}{section}{Zusammenfassung}
+%\label{sec:Zusammenfassung}
+
+%Eine deutsche Zusammenfassung ist nicht unbedingt notwendig.
+
+%\newpage
+
+\tableofcontents
+
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction and Background}
+\label{sec:introduction}
+%
+Introduce the topic of your thesis and provide an overview of previous work with references, e.~g. \cite{Stock2018} (required for a literature list -- references at the end of the document).
+
+Be brief, the document excluding titlepage, abstract, table of contents and references should not exceed three pages.
+%
+\section{Aim and Research Question / Objective / Hypothesis}
+\label{sec:aim}
+%
+Address the goals of the thesis and formulate the research question /
+objective / hypothesis. Please adjust the title of this section
+accordingly.
+%
+\section{Materials and Methods}
+\label{sec:materials}
+%
+Outline the tools and methods you plan to use to achieve your research
+goals.
+%
+\section{Expected Results}
+\label{sec:results}
+%
+Briefly discuss the expected results and their impact.
+%
+\section{Structure of Thesis}
+\label{sec:structure}
+%
+Make a coarse structure (index) of the planned thesis document:
+% 
+\begin{enumerate}
+\item Section 1
+  \begin{enumerate}
+  \item Subsection
+  \item \dots
+  \end{enumerate}
+\item Section 2
+  \begin{enumerate}
+  \item Subsection
+  \item \dots
+  \end{enumerate}
+\item \dots
+\end{enumerate}
+% 
+\section{Planned Timeline}
+\label{sec:timeline}
+%
+Provide a coarse timeline for the thesis (table or other, as you prefer).
+\begin{table}[htb!]
+  \centering
+  % \begin{adjustbox}{width=\textwidth}
+  %   You can use adjustbox in case your table is too wide
+  \caption{Planned timeline for thesis}
+  \label{tab:timeline}
+  \begin{tabularx}{\linewidth}{l|l}
+    \toprule%\hline
+    \textbf{Time} & \textbf{Activity}\\
+    \midrule
+    early March & e.~g. literature research; get familiar with the topic\\
+    \midrule
+    early April & e.~g. first measurements, or whatever is planned\\
+    \midrule
+    \dots & \dots\\
+    \midrule
+    November & e.~g. finish thesis and hand in\\
+   \bottomrule
+  \end{tabularx}
+  % \end{adjustbox}
+\end{table}
+% \newpage
+\FloatBarrier
+\printbibliography[heading=bibintoc]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
