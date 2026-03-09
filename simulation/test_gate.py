@@ -19,8 +19,8 @@ if __name__ == "__main__":
     sim = gate.Simulation()
 
     # chemin robuste pour le dossier de sortie
-    base_dir = Path(__file__).resolve().parent
-    output_dir = base_dir / "output_test_gate"
+    repo_root = Path(__file__).resolve().parent.parent
+    output_dir = repo_root / "simulation" / "output_test_gate"
     sim.output_dir = output_dir
 
     sim.random_seed = "auto"
@@ -189,7 +189,11 @@ if __name__ == "__main__":
     plt.title("Bragg Peak")
     plt.grid(True)
 
-    output_plot = output_dir / "dose" / "bragg_peak.png"
+    # dossier figures dans le repo
+    figures_dir = repo_root / "figures"
+    figures_dir.mkdir(parents=True, exist_ok=True)
+
+    output_plot = figures_dir / "bragg_peak.png"
 
     plt.savefig(output_plot, dpi=200, bbox_inches="tight")
 
