@@ -1,0 +1,89 @@
+FLASH-BPM Simulation – System Description
+=========================================
+
+General Objective
+-----------------
+The goal of this project is to simulate the response of a detector system exposed
+to high-energy charged particle beams using Monte Carlo simulations with OpenGATE.
+The simulations aim to study energy deposition, detector response and dose profiles,
+with potential applications in medical particle therapy and radiation monitoring.
+
+
+Particle Beam
+-------------
+Particle type:
+- Proton beam (initial studies)
+- Possible future extension to carbon ions
+
+Energy range:
+- Minimum energy: 62.4 MeV
+- Maximum energy: 252.7 MeV
+
+Initial simulation strategy:
+- Start with the extreme values of the energy range
+- Later perform scans across intermediate energies
+
+Beam spatial distribution:
+- Initial model: Gaussian beam profile
+- Other possible profiles may be tested in later studies
+
+
+Detector System
+---------------
+Detector board (PCB):
+- Material: FR4
+- Thickness: 1.84 mm
+- Function: support and readout electronics for the detector
+
+Detector sensor:
+- Current simulations use silicon as a simplified detector material
+- Future studies may include other materials depending on detector design
+
+
+Simulation Environment
+----------------------
+Simulation framework:
+- OpenGATE (based on Geant4)
+
+Physics models:
+- QGSP_BIC_EMZ physics list
+
+Transport medium:
+- Air between source and detector
+
+Additional geometry:
+- Water phantom used to model tissue-equivalent material
+- Used to study depth-dose profiles and Bragg peak behavior
+
+
+Quantities of Interest
+----------------------
+The main physical quantities to be studied include:
+
+- Energy deposition in the detector
+- Dose distribution in the phantom
+- Depth-dose profile (Bragg peak)
+- Beam properties at the detector plane
+  (energy, direction, position)
+
+
+Outputs of the Simulation
+-------------------------
+The simulations produce several output data types:
+
+- Phase-space files (particle properties at detector entrance)
+- Energy deposition maps
+- Dose distributions
+
+
+Possible Future Studies (depending on the requests of Dr. Bergauer)
+-------------------------------------------------------------------
+- Effect of cristal detector (maybe
+  also diamond) on UHDR
+- Simulation of carbon ion beams
+- Study of different beam profiles
+- Detector material optimization
+- Analysis of detector response
+  under varying beam conditions (shape, energy,
+  particle, medium (?) )
+- Comparison between simulation and experimental measurements
