@@ -8,6 +8,11 @@ output_test_gate/
 *.raw
 *.wrl
 
+output_first_simu/
+*.root
+*.raw
+*.wrl
+
 # VS Code
 .vscode/
 
