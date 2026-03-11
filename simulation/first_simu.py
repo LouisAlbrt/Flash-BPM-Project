@@ -59,7 +59,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     world.material = "G4_AIR"
 
     # ── Phantom ───────────────────────────────────────────────────────
-    # Centré en z=0 → face arrière à +phantom_depth_cm/2
+    # Centered at z = 0 → back face at +phantom_depth_cm/2
     phantom             = sim.add_volume("Box", "phantom")
     phantom.mother      = world.name
     phantom.size        = [5 * cm, 5 * cm, phantom_depth_cm * cm]
@@ -67,13 +67,13 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     phantom.material    = "G4_WATER"
     phantom.color       = [0, 1, 1, 0.25]
 
-    # Tous les calculs de position en cm (nombres purs)
-    # puis on multiplie par cm uniquement au moment de .translation / .size
+    # All position calculations are done in cm (pure numbers)
+    # then multiplied by cm only when assigning .translation / .size
     PCB_THICKNESS_CM     = 0.184    # 1.84 mm
     PLANE_IN_THICKNESS_CM = 0.0005  # 5 µm  ← espace réservé explicitement
     SENSOR_THICKNESS_CM  = 0.05     # 0.5 mm
 
-    # Chaîne stricte : phantom | gap | PCB | plane_in | sensor
+    # Strict geometry chain: phantom | gap | PCB | plane_in | sensor
     phantom_back_z  = phantom_depth_cm / 2
     pcb_center_z    = phantom_back_z + pcb_offset_cm + PCB_THICKNESS_CM / 2
     pcb_back_z      = pcb_center_z + PCB_THICKNESS_CM / 2
@@ -96,7 +96,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     sensor.material    = "G4_Si"
     sensor.color       = [0, 0, 1, 1]
 
-    # ── Plan de contrôle (juste avant le sensor) ──────────────────────
+    # ── Control plane (just before the sensor) ────────────────────────
     plane_in             = sim.add_volume("Box", "plane_in")
     plane_in.mother      = world.name
     plane_in.size        = [2 * cm, 2 * cm, PLANE_IN_THICKNESS_CM * cm]
@@ -104,7 +104,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     plane_in.material    = "G4_AIR"
     plane_in.color       = [1, 0, 0, 1]
 
-    # Cuts et step limits
+    # Cuts and step limits
     sim.physics_manager.set_production_cut("phantom", "all", 0.1 * mm)
     sim.physics_manager.set_production_cut("sensor",  "all", 0.01 * mm)
     phantom.set_max_step_size(0.5 * mm)
@@ -125,7 +125,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     # ── Actors ────────────────────────────────────────────────────────
     stats = sim.add_actor("SimulationStatisticsActor", "stats")
 
-    # Phase-space au niveau du sensor
+    # Phase-space at sensor entrance
     phsp                 = sim.add_actor("PhaseSpaceActor", "phsp")
     phsp.attached_to     = plane_in.name
     phsp.output_filename = Path("phsp") / f"phsp_{energy_mev:.1f}MeV.root"
@@ -134,7 +134,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
         "ParticleName", "PDGCode", "GlobalTime",
     ]
 
-    # Dose dans le fantôme (Bragg peak)
+    # Dose in the phantom (Bragg peak)
     dose_phantom                       = sim.add_actor("DoseActor", "dose_phantom")
     dose_phantom.attached_to           = phantom.name
     dose_phantom.size                  = [1, 1, 300]
@@ -147,7 +147,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
     dose_phantom.dose.active           = True
     dose_phantom.dose.output_filename  = Path("dose") / f"phantom_dose_{energy_mev:.1f}MeV.mhd"
 
-    # Dose dans le sensor
+    # Dose in the sensor
     dose_sensor                       = sim.add_actor("DoseActor", "dose_sensor")
     dose_sensor.attached_to           = sensor.name
     dose_sensor.size                  = [100, 100, 10]
@@ -162,9 +162,9 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
 
     print(f"\n{'─'*55}")
     print(f"  Preset        : {preset}")
-    print(f"  Phantom depth : {phantom_depth_cm} cm  (face arrière à z={phantom_back_z} cm)")
-    print(f"  PCB centre    : z = {pcb_center_z:.3f} cm")
-    print(f"  Sensor centre : z = {sensor_center_z:.3f} cm")
+    print(f"  Phantom depth : {phantom_depth_cm} cm  (back face at z={phantom_back_z} cm)")
+    print(f"  PCB center    : z = {pcb_center_z:.3f} cm")
+    print(f"  Sensor center : z = {sensor_center_z:.3f} cm")
     print(f"  Source        : z = {-(phantom_depth_cm/2 + 5):.1f} cm")
     print(f"{'─'*55}")
 
@@ -172,7 +172,7 @@ def build_simulation(preset: dict, n_primaries: int, output_dir: Path):
 
 
 # ─────────────────────────────────────────────
-# Analyse Bragg peak
+# Bragg peak analysis
 # ─────────────────────────────────────────────
 def analyze_depth_dose(dose_file: Path, figure_file: Path, energy_mev: float):
     img         = sitk.ReadImage(str(dose_file))
@@ -182,7 +182,7 @@ def analyze_depth_dose(dose_file: Path, figure_file: Path, energy_mev: float):
     spacing = img.GetSpacing()
     origin  = img.GetOrigin()
     z       = origin[2] + spacing[2] * np.arange(len(depth_dose))
-    z_cm    = (z - z[0]) / 10.0   # entrée du fantôme = 0
+    z_cm    = (z - z[0]) / 10.0   # phantom entry at z=0 cm
 
     peak_idx = int(np.argmax(depth_dose))
     peak_z   = z_cm[peak_idx]
@@ -193,8 +193,8 @@ def analyze_depth_dose(dose_file: Path, figure_file: Path, energy_mev: float):
     plt.figure(figsize=(7, 4))
     plt.plot(z_cm, dose_norm, linewidth=1.5)
     plt.axvline(peak_z, color="red", linestyle="--", alpha=0.6, label=f"Bragg peak : {peak_z:.2f} cm")
-    plt.xlabel("Profondeur dans le fantôme (cm)")
-    plt.ylabel("Dose normalisée")
+    plt.xlabel("Depth in phantom (cm)")
+    plt.ylabel("Normalized dose")
     plt.title(f"Bragg peak – {energy_mev:.1f} MeV")
     plt.legend()
     plt.grid(True, linestyle="--", alpha=0.4)
@@ -210,10 +210,10 @@ def analyze_depth_dose(dose_file: Path, figure_file: Path, energy_mev: float):
 
 
 # ─────────────────────────────────────────────
-# Run
+# Run simulation
 # ─────────────────────────────────────────────
 def run_case(mode: str, n_primaries: int = 20000):
-    assert mode in PRESETS, f"mode doit être 'min' ou 'max', pas '{mode}'"
+    assert mode in PRESETS, f"mode can be either 'min' or 'max', not '{mode}'"
     preset     = PRESETS[mode]
     energy_mev = preset["energy_mev"]
 
@@ -275,7 +275,7 @@ if __name__ == "__main__":
         "--nparticles",
         type=int,
         default=20000,
-        help="Nombre de protons primaires (default: 20000)",
+        help="Number of primary protons (default: 20000)",
     )
     args = parser.parse_args()
 
