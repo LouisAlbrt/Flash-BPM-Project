@@ -19,7 +19,7 @@ PRESETS = {
     },
     "max": {
         "energy_mev":       252.7,
-        "phantom_depth_cm": 30.0,  # range théorique ~38 cm → fantôme 30 cm
+        "phantom_depth_cm": 40.0,  # range théorique ~38 cm → fantôme 40 cm
         "pcb_offset_cm":    2.0,
     },
 }
@@ -256,6 +256,9 @@ def run_case(mode: str, n_primaries: int = 20000):
         "summary":           summary,
     }
 
+# to get a simulation : 
+# python first_simu.py --mode max --nparticles 50000
+# This will run the simulation for the "max" preset (252.7 MeV) with 50,000 primary protons.
 
 # ─────────────────────────────────────────────
 # Entry point
